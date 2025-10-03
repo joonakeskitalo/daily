@@ -1,0 +1,116 @@
+const output = document.getElementById("output");
+const teamInput = document.getElementById("team-members");
+
+const easyMDE = new EasyMDE({
+  element: document.getElementById("markdown-input"),
+  toolbar: false,
+  maxHeight: 700,
+  spellChecker: false,
+  autofocus: true,
+  sideBySideFullscreen: false,
+  unorderedListStyle: "-",
+  status: false,
+  renderingConfig: {
+    singleLineBreaks: true,
+  },
+});
+
+easyMDE.toggleSideBySide();
+
+const updateTemplate = () => {
+  const names = teamInput.value
+    .split(",")
+    .filter((x) => x)
+    .map((x) => x.trim());
+
+  const getDate = () => {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const monthPadded = ("0" + month).slice(-2);
+    const dayPadded = ("0" + day).slice(-2);
+    return `${year}-${monthPadded}-${dayPadded}`;
+  };
+
+  const namesDaily = names
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value: x }) => `**${x}**\n- Yesterday: \n- Today: \n- Blockers: `)
+    .join("\n\n");
+
+  const out = [`### ${getDate()} daily`, namesDaily].join("\n\n");
+  easyMDE.value(out);
+};
+
+const parse = (addBreaks = false, removeHeadings = false) => {
+  const html = marked.parse(easyMDE.value(), {
+    breaks: true,
+    gfm: true,
+  });
+
+  const _result = addBreaks
+    ? html
+        .replaceAll("</pre>", "</pre><br/>")
+        .replaceAll("</p>\n<p>", "</p><br/><p>")
+        .replaceAll("\n<h1>", "<br/><h1>")
+        .replaceAll("\n<h2>", "<br/><h2>")
+        .replaceAll("\n<h3>", "<br/><h3>")
+        .replaceAll("\n<h4>", "<br/><h4>")
+        .replaceAll("\n<h5>", "<br/><h5>")
+        .replaceAll("\n<h6>", "<br/><h6>")
+        .replaceAll("</p>\n<strong>\n", "</p><br/><strong>")
+        .replaceAll("</ul>\n<p>", "</ul><br/><p>")
+        .replaceAll("</strong></p><br/><p>", "</strong></p><p>")
+    : html;
+
+  const result = removeHeadings
+    ? _result
+        .replaceAll("<h1>", "<b>")
+        .replaceAll("</h1>", "</b><br/>")
+        .replaceAll("<h2>", "<b>")
+        .replaceAll("</h2>", "</b><br/>")
+        .replaceAll("<h3>", "<b>")
+        .replaceAll("</h3>", "</b><br/>")
+        .replaceAll("<h4>", "<b>")
+        .replaceAll("</h4>", "</b><br/>")
+        .replaceAll("<h5>", "<b>")
+        .replaceAll("</h5>", "</b><br/>")
+        .replaceAll("<h6>", "<b>")
+        .replaceAll("</h6>", "</b><br/>")
+    : _result;
+
+  output.innerHTML = result;
+};
+
+const copy = (addBreaks = false, removeHeadings = false) => {
+  parse(addBreaks, removeHeadings);
+  navigator.clipboard.write([
+    new ClipboardItem({
+      "text/plain": new Blob([output.innerText], { type: "text/plain" }),
+      "text/html": new Blob([output.innerHTML], { type: "text/html" }),
+    }),
+  ]);
+};
+
+function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}
+
+const teamStorageKey = "daily-templater-2025-10-03-team";
+
+const onTeamMembersChange = debounce(() => {
+  updateTemplate();
+  localStorage.setItem(teamStorageKey, teamInput.value);
+}, 200);
+
+window.onload = () => {
+  teamInput.value = localStorage.getItem(teamStorageKey);
+  updateTemplate();
+};

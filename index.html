@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Daily templater</title>
+  </head>
+  <body>
+    <div class="content-container">
+      <div class="content">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h1>Daily templater</h1>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              align-items: flex-end;
+              gap: 4px;
+            "
+          >
+            <div>
+              <label for="team-members">Team members:</label>
+              <input
+                spellcheck="false"
+                oninput="onTeamMembersChange()"
+                type="text"
+                id="team-members"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+
+        <textarea name="" id="markdown-input"></textarea>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 12px">
+          <button onclick="copy()">Copy daily as rich text</button>
+        </div>
+        <div style="display: none">
+          <b>Output</b>
+          <div id="output"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="script.js"></script>
+</html>
