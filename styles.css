@@ -1,5 +1,9 @@
-body {
+body,
+html {
     font-family: Inter, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 
@@ -19,11 +23,20 @@ label {
 .content-container {
     display: flex;
     justify-content: center;
+    height: 100dvh;
 
     &>.content {
         width: 100%;
         max-width: 1200px;
+        margin: 0 24px;
     }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
 
 button {
