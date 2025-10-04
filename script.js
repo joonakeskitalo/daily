@@ -106,3 +106,6 @@ window.onload = () => {
   teamInput.value = localStorage.getItem(teamStorageKey);
   updateTemplate();
 };
+
+tabOverride.tabSize(4);
+tabOverride.set(textInput);
