@@ -19,7 +19,10 @@ easyMDE.toggleSideBySide();
 
 const updateTemplate = () => {
   const names = teamInput.value
-    .split(",")
+    .replaceAll(",", " ")
+    .replaceAll(".", " ")
+    .replaceAll("-", " ")
+    .split(" ")
     .filter((x) => x)
     .map((x) => x.trim());
 
