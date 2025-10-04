@@ -1,21 +1,6 @@
-const output = document.getElementById("output");
 const teamInput = document.getElementById("team-members");
-
-const easyMDE = new EasyMDE({
-  element: document.getElementById("markdown-input"),
-  toolbar: false,
-  maxHeight: "70dvh",
-  spellChecker: false,
-  autofocus: true,
-  inputStyle: "contenteditable",
-  styleSelectedText: false,
-  sideBySideFullscreen: true,
-  unorderedListStyle: "-",
-  status: false,
-  renderingConfig: {
-    singleLineBreaks: true,
-  },
-});
+const textInput = document.getElementById("daily-input");
+const markdownOutput = document.getElementById("output");
 
 const updateTemplate = () => {
   if (teamInput.value === "") return;
@@ -45,11 +30,11 @@ const updateTemplate = () => {
     .join("\n\n");
 
   const out = [`### ${getDate()} daily`, namesDaily].join("\n\n");
-  easyMDE.value(out);
+  textInput.value = out;
 };
 
 const parse = (addBreaks = false, removeHeadings = false) => {
-  const html = marked.parse(easyMDE.value(), {
+  const html = marked.parse(textInput.value, {
     breaks: true,
     gfm: true,
   });
@@ -85,15 +70,17 @@ const parse = (addBreaks = false, removeHeadings = false) => {
         .replaceAll("</h6>", "</b><br/>")
     : _result;
 
-  output.innerHTML = result;
+  markdownOutput.innerHTML = result;
 };
 
 const copy = (addBreaks = false, removeHeadings = false) => {
   parse(addBreaks, removeHeadings);
   navigator.clipboard.write([
     new ClipboardItem({
-      "text/plain": new Blob([output.innerText], { type: "text/plain" }),
-      "text/html": new Blob([output.innerHTML], { type: "text/html" }),
+      "text/plain": new Blob([markdownOutput.innerText], {
+        type: "text/plain",
+      }),
+      "text/html": new Blob([markdownOutput.innerHTML], { type: "text/html" }),
     }),
   ]);
 };
