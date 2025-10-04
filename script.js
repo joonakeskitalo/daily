@@ -27,9 +27,9 @@ const updateTemplate = () => {
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value: x }) => `**${x}**\n- Yesterday: \n- Today: \n- Blockers: `)
-    .join("\n\n");
+    .join("\n\n\n");
 
-  const out = [`### ${getDate()} daily`, namesDaily].join("\n\n");
+  const out = [`### ${getDate()} daily`, namesDaily].join("\n\n\n");
   textInput.value = out;
 };
 
