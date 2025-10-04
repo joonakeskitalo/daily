@@ -4,18 +4,18 @@ const teamInput = document.getElementById("team-members");
 const easyMDE = new EasyMDE({
   element: document.getElementById("markdown-input"),
   toolbar: false,
-  maxHeight: 700,
+  maxHeight: "70dvh",
   spellChecker: false,
   autofocus: true,
-  sideBySideFullscreen: false,
+  inputStyle: "contenteditable",
+  styleSelectedText: false,
+  sideBySideFullscreen: true,
   unorderedListStyle: "-",
   status: false,
   renderingConfig: {
     singleLineBreaks: true,
   },
 });
-
-easyMDE.toggleSideBySide();
 
 const updateTemplate = () => {
   const names = teamInput.value
