@@ -18,6 +18,8 @@ const easyMDE = new EasyMDE({
 });
 
 const updateTemplate = () => {
+  if (teamInput.value === "") return;
+
   const names = teamInput.value
     .replaceAll(",", " ")
     .replaceAll(".", " ")
