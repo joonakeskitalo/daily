@@ -26,7 +26,7 @@ const updateTemplate = () => {
   const namesDaily = names
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
-    .map(({ value: x }) => `**${x}**\n- Yesterday: \n- Today: \n- Blockers: `)
+    .map(({ value: x }) => `**${x}**\n- `)
     .join("\n\n\n");
 
   const out = [`### ${getDate()} daily`, namesDaily].join("\n\n\n");
@@ -109,3 +109,30 @@ window.onload = () => {
 
 tabOverride.tabSize(4);
 tabOverride.set(textInput);
+
+const getCurrentLineStartAndEnd = () => {
+  const el = document.activeElement;
+  const selectionStart = el.selectionStart;
+  const allLines = el.value.split("\n");
+  const lines = el.value.substring(0, selectionStart).split("\n");
+  const lineIndex = lines.length - 1;
+  const line = allLines[lineIndex];
+  const wasFirstLine = lineIndex === 0 ? 0 : 1;
+  const start = allLines.slice(0, lineIndex).join("\n").length + wasFirstLine;
+  const end = start + line.length;
+  return { start, end };
+};
+
+const handleKeyPress = (e) => {
+  if (e.key === "Enter") {
+    const { start, end } = getCurrentLineStartAndEnd();
+    const lineText = textInput.value.substring(start, end);
+
+    if (lineText.startsWith("- ")) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const dash = "\n- ";
+      textInput.setRangeText(dash, end, end, "end");
+    }
+  }
+};
