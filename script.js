@@ -43,14 +43,14 @@ const parse = (addBreaks = false, removeHeadings = false) => {
     ? html
         .replaceAll("</pre>", "</pre><br/>")
         .replaceAll("</p>\n<p>", "</p><br/><p>")
-        .replaceAll("\n<h1>", "<br/><h1>")
-        .replaceAll("\n<h2>", "<br/><h2>")
-        .replaceAll("\n<h3>", "<br/><h3>")
-        .replaceAll("\n<h4>", "<br/><h4>")
-        .replaceAll("\n<h5>", "<br/><h5>")
-        .replaceAll("\n<h6>", "<br/><h6>")
-        .replaceAll("</p>\n<strong>\n", "</p><br/><strong>")
-        .replaceAll("</ul>\n<p>", "</ul><br/><p>")
+        .replaceAll("<h1>", "<br/><h1>")
+        .replaceAll("<h2>", "<br/><h2>")
+        .replaceAll("<h3>", "<br/><h3>")
+        .replaceAll("<h4>", "<br/><h4>")
+        .replaceAll("<h5>", "<br/><h5>")
+        .replaceAll("<h6>", "<br/><h6>")
+        .replaceAll("</p><strong>", "</p><br/><strong>")
+        .replaceAll("</ul><p>", "</ul><br/><p>")
         .replaceAll("</strong></p><br/><p>", "</strong></p><p>")
     : html;
 
