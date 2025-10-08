@@ -95,15 +95,15 @@ function debounce(func, timeout = 300) {
   };
 }
 
-const teamStorageKey = "daily-templater-2025-10-03-team";
+const teamMembersStorageKey = "daily-templater-2025-10-03-team";
 
 const onTeamMembersChange = debounce(() => {
   updateTemplate();
-  localStorage.setItem(teamStorageKey, teamInput.value);
+  localStorage.setItem(teamMembersStorageKey, teamInput.value);
 }, 200);
 
 window.onload = () => {
-  teamInput.value = localStorage.getItem(teamStorageKey);
+  teamInput.value = localStorage.getItem(teamMembersStorageKey);
   updateTemplate();
 };
 
