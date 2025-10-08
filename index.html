@@ -43,7 +43,14 @@
           </div>
         </div>
 
-        <textarea onkeydown="handleKeyPress(event)" id="daily-input"></textarea>
+        <textarea
+          spellcheck="false"
+          autocapitalize="false"
+          autocomplete="false"
+          autocorrect="false"
+          onkeydown="handleKeyPress(event)"
+          id="daily-input"
+        ></textarea>
 
         <div style="display: flex; justify-content: flex-end; margin-top: 12px">
           <button onclick="copy(false,true)">Copy daily as rich text</button>
