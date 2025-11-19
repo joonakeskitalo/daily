@@ -148,6 +148,24 @@ const handleKeyPress = (e) => {
 
 const quotes = [
   [
+    "“A day without sunshine is like, you know, night.” ― Steve Martin",
+    "“I may not have gone where I intended to go, but I think I have ended up where I needed to be.” ― Douglas Adams, The Long Dark Tea-Time of the Soul",
+    "“Life is what happens to us while we are making other plans.” ― Allen Saunders",
+    "All that glitters is not gold. - William Shakespeare",
+    "Eighty percent of success is showing up. - Woody Allen",
+    "Elementary, my dear Watson. - Sherlock Holmes",
+    "Frankly, my dear, I don't give a damn. - Rhett Butler",
+    "Genius is one percent inspiration and ninety-nine percent perspiration. - Thomas Edison",
+    "Go ahead, make my day. - Harry Callahan",
+    "Houston, we have a problem. - Jim Lovell",
+    "I love the smell of napalm in the morning. - Lt. Kilgore",
+    "I'll be back. - Terminator",
+    "I've got a feeling we're not in Kansas anymore. - Dorothy",
+    "If at first you don't succeed, try, try again. - W. E. Hickson",
+    "Life is like a box of chocolates. You never know what you're gonna get. - Forrest Gump",
+    "Nothing is certain except for death and taxes. - Benjamin Franklin",
+  ],
+  [
     '"Ennen oli poliisit sentään poliiseja ja laivat rautaa. Nyt on poliisit peltiä ja laivat mitä lie lasikuitua.". -Matti Nykänen',
     '"Mä tunnen kovan jätkän, se pelaa shakkia, mutta koskaan ei oo voittanut mattia!" -Matti Nykänen',
     '"Jos se romaanimuotoon kirjoitetaan, niin siinä kirjassa ei ole yhtään totta." -Matti Nykänen',
@@ -185,7 +203,6 @@ const quotes = [
     '"Tulkaas katsomaan, tässä on kaveri joka ei ole vähän tyhmä. Sinusta tulisi hyvä ministeri." -Juice Leskinen',
     '"Älkää seiskö siellä reunassa, kun siellä on nuo meidän vahvistinkaapit, niin siellä on kaikkein kovin meteli. Tulkaa tähän ihan keskelle. Tässä ainoastaan haisee." -Juice Leskinen',
     '"Hän on siitä omituinen mies, että hänen kengissään lukee Jalas. Ilmeisesti sitten myös hänen hansikkaissaan lukee Kädes. Ja jos hän ostaa pullon viinaa, niin siinä lukee Maksas. Ja Louerantahan maksaa." -Juice Leskinen',
-    '"Nuorempana jaksoin kantaa stondiksella ämpärillisen vettä, mutta ei enää.... polvet ei kestä." -50v -Juice Leskinen',
     '"Pikku hiljaa. Pitää odottaa, että se muuttuu. Tää maailma on vähän niin kuin krapula, se menee ohi ainoastaan odottamalla ja sen voi välttää myös vetämällä uudestaan lärvit." -Juice Leskinen',
     '"Olen hyvä isä, mutta huono perheenisä." -Juice Leskinen',
     '"Keho, mä luulen et se on niinku keikkabussi, et siinä kuljetellaan kaikenlaista roinaa mukana." -Juice Leskinen',
