@@ -2,9 +2,12 @@ const teamInput = document.getElementById("team-members");
 const textInput = document.getElementById("daily-input");
 const markdownOutput = document.getElementById("output");
 
+const teamMembersStorageKey = "daily-templater-2025-10-03-team";
 
 const updateTemplate = () => {
   if (teamInput.value === "") return;
+
+  localStorage.setItem(teamMembersStorageKey, teamInput.value);
 
   const names = teamInput.value
     .replaceAll(",", " ")
@@ -97,13 +100,6 @@ function debounce(func, timeout = 300) {
     }, timeout);
   };
 }
-
-const teamMembersStorageKey = "daily-templater-2025-10-03-team";
-
-const onTeamMembersChange = debounce(() => {
-  updateTemplate();
-  localStorage.setItem(teamMembersStorageKey, teamInput.value);
-}, 200);
 
 window.onload = () => {
   teamInput.value = localStorage.getItem(teamMembersStorageKey);
