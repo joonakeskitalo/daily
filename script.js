@@ -91,16 +91,6 @@ const copy = (addBreaks = false, removeHeadings = false) => {
   ]);
 };
 
-function debounce(func, timeout = 300) {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      func.apply(this, args);
-    }, timeout);
-  };
-}
-
 window.onload = () => {
   teamInput.value = localStorage.getItem(teamMembersStorageKey);
   updateTemplate();
@@ -108,30 +98,3 @@ window.onload = () => {
 
 tabOverride.tabSize(4);
 tabOverride.set(textInput);
-
-const getCurrentLineStartAndEnd = () => {
-  const el = document.activeElement;
-  const selectionStart = el.selectionStart;
-  const allLines = el.value.split("\n");
-  const lines = el.value.substring(0, selectionStart).split("\n");
-  const lineIndex = lines.length - 1;
-  const line = allLines[lineIndex];
-  const wasFirstLine = lineIndex === 0 ? 0 : 1;
-  const start = allLines.slice(0, lineIndex).join("\n").length + wasFirstLine;
-  const end = start + line.length;
-  return { start, end };
-};
-
-const handleKeyPress = (e) => {
-  if (e.key === "Enter") {
-    const { start, end } = getCurrentLineStartAndEnd();
-    const lineText = textInput.value.substring(start, end);
-
-    if (lineText.startsWith("- ")) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      const dash = "\n- ";
-      textInput.setRangeText(dash, end, end, "end");
-    }
-  }
-};
