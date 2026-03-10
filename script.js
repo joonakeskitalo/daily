@@ -7,6 +7,18 @@ const teamMembersStorageKey = "daily-templater-2025-10-03-team";
 const updateTemplate = () => {
   if (teamInput.value === "") return;
 
+  const isTextInputEmpty = textInput.value === "";
+
+  if (!isTextInputEmpty) {
+    const allowed = window.confirm(
+      "Daily note is not empty. Are you sure you want to clear note & update team members?",
+    );
+
+    if (!allowed) {
+      return;
+    }
+  }
+
   localStorage.setItem(teamMembersStorageKey, teamInput.value);
 
   const names = teamInput.value
